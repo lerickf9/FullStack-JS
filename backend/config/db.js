@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const conectarDB = async () => {
     try{
         const db = await mongoose.connect(
-            process.env.MONGO_URI, 
+            process.env.MONGO_URI,
+            
         // Error 
         //{
         //    useNewUrlParser: true,
