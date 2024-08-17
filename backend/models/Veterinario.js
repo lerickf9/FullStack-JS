@@ -1,4 +1,5 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import generarId from '../helpers/generarid.js'
 
 const veterinarioSchema = mongoose.Schema({
     nombre: {
@@ -27,7 +28,7 @@ const veterinarioSchema = mongoose.Schema({
     },
     token:{
         type: String,
-        default: Date.now(),
+        default: generarId(),
     },
     confirmado: {
         type: Boolean,
