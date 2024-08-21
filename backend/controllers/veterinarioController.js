@@ -113,11 +113,31 @@ const comprobarToken = async (req, res) => {
 
     if(tokenValido){
         //el token es valido el usuario existe
+        res.json({ msg: 'Token valido y el usuario existe'})
     }else{
         const error = new Error("token no valido");
         return res.status(400).json({ msg: error.message });
     }
 };
-const nuevoPassword = (req, res) => {};
+const nuevoPassword = async(req, res) => {
+    const { token} = req.params; //params viene desde la url
+    const { password } = req.body; //body viene desde el usuario escriba
+
+    const veterinario = await Veterinario.findOne({ token });
+    if(!veterinario){
+        const error = new Error("Hubo un error");
+        return res.status(400).json({ msg: error.message });
+    }
+
+    try{
+        veterinario.token = null;
+        veterinario.password = password;
+        await veterinario.save();
+        res.json({ msg: "Password modificado correctamente"});
+    }catch(error){
+        console.log(error);
+    }
+ 
+};
 
 export {registrar, perfil, confirmar, autenticar, olvidePassword, comprobarToken, nuevoPassword };
