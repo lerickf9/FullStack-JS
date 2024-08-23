@@ -130,7 +130,7 @@ const nuevoPassword = async(req, res) => {
     }
 
     try{
-        veterinario.token = null;
+        veterinario.token = null; 
         veterinario.password = password;
         await veterinario.save();
         res.json({ msg: "Password modificado correctamente"});
