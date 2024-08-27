@@ -49,6 +49,7 @@ veterinarioSchema.methods.comprobarPassword = async function (passwordFormulario
     return await bcrypt.compare(passwordFormulario, this.password);
 }
 
-
+//Registra veterinario como modelo en la bd
 const Veterinario = mongoose.model("Veterinario", veterinarioSchema);
+//Esto exporta el modelo en otras partes que lo necesitemos
 export default Veterinario;

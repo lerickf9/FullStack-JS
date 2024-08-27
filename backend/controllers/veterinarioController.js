@@ -7,8 +7,8 @@ const registrar = async (req, res) => {
     //Probando el request del body...
     
     //Prevenir email duplicados
-    const { email } = req.body;
-    const existeUsuario = await Veterinario.findOne({email});
+    const { email } = req.body; //Aplicamos destruction
+    const existeUsuario = await Veterinario.findOne({email}); //Definimos donde enviar los datos desde el modelo Veterianrio
 
     if(existeUsuario){
         const error = new Error("Usuario ya registrado");
@@ -16,11 +16,10 @@ const registrar = async (req, res) => {
     }
 
     try{
+        //Se crea un try catch para asegurar si perfil tiene un error y lo manejamos de la mejor forma
         //Guardar un Nuevo Veterinario
         const veterinario = new Veterinario(req.body);
         const VeterinarioGuardado = await veterinario.save();
-
-        
 
         res.json(VeterinarioGuardado);
     }catch(error){
@@ -30,7 +29,7 @@ const registrar = async (req, res) => {
 };
 
 const perfil = (req, res ) => {
-    //console.log(req.veterinario);
+    // console.log(req.veterinario);
     const { veterinario } = req;
     res.json({ veterinario });
 };
