@@ -12,7 +12,7 @@ const registrar = async (req, res) => {
 
     if(existeUsuario){
         const error = new Error("Usuario ya registrado");
-        return res.status(400).json({msg: error.message})
+        return res.status(400).json({msg: error.message});
     }
 
     try{
