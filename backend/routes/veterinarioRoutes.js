@@ -14,7 +14,7 @@ import checkAuth from '../middleware/authMiddleware.js'
 
 //area publica
 router.post("/", registrar);
-router.get("/confirmar/:token", confirmar);
+router.get("/confirmar/:token", confirmar); //se envia un parametro dinamico con :token debe ser el mismo nombre que fue creado en el controllers.
 router.post("/login", autenticar);
 router.post('/olvide-password', olvidePassword);
 // router.get('/olvide/password/:token', comprobarToken);
