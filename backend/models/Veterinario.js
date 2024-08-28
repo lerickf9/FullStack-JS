@@ -45,7 +45,12 @@ veterinarioSchema.pre('save', async function(next){
     this.password = await bcrypt.hash(this.password, salt);
 });
 
+//Registrado este metodo que solo se ocupará aquí 
 veterinarioSchema.methods.comprobarPassword = async function (passwordFormulario) {
+    //compare() compara sin hashear o el que iongresa el usuario y lo compara con el password hasheado.
+    //Tambien el metodo compare toma 2 parametros uno de ellos es el passwordFormulario que es que escribe el usuario
+    //mas el segundo parametro que hace la comparacion y en este caso es el password hasheado y es nombrado 
+    //como this.password
     return await bcrypt.compare(passwordFormulario, this.password);
 }
 
