@@ -26,7 +26,8 @@ const pacienteSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Veterinario",
     },
-},{
+},
+{
     timestamps: true,
 }
 );

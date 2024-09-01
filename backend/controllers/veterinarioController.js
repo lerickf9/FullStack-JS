@@ -29,6 +29,7 @@ const registrar = async (req, res) => {
 
 const perfil = (req, res ) => {
     // console.log(req.veterinario);
+    // Tenemos datos del servidor
     const { veterinario } = req;
     res.json({ veterinario });
 };
@@ -94,6 +95,7 @@ const olvidePassword = async(req, res) => {
     const { email } = req.body;
 
     // console.log(email);
+    //Buscamos el veterinario con el primero que encuntre con el email buscado.
     const existeVeterinario = await Veterinario.findOne({email});
     if(!existeVeterinario){
         const error = new Error("El usuario no existe");
@@ -101,7 +103,10 @@ const olvidePassword = async(req, res) => {
     }
 
     try{
+        //Ya se creo la instancia de existeVeterinario y ahora generamos un nuevo id con el helpers creado 
         existeVeterinario.token = generarId()
+
+        //Guardamos en la BD el nuevo id
         await existeVeterinario.save()
         res.json({msg: 'Hemos enviado un email con las instrucciones'});
 
