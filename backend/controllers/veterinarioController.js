@@ -135,20 +135,24 @@ const comprobarToken = async (req, res) => {
 };
 const nuevoPassword = async(req, res) => {
     const { token} = req.params; //params viene desde la url
-    const { password } = req.body; //body viene desde el usuario escriba
+    const { password } = req.body; //body viene desde el usuario escriba en los diferentes input o formulario
 
     const veterinario = await Veterinario.findOne({ token });
+    //Validamos el veterinario o usuario
     if(!veterinario){
         const error = new Error("Hubo un error");
         return res.status(400).json({ msg: error.message });
     }
 
     try{
+        //Para probarlo en postman debemos enviar el nuevo password y en la url el token del usuario que quiero cambiar el password
+        //Reseteamos el token una vez que se haya comprobado el pasword del usuario
         veterinario.token = null; 
         veterinario.password = password;
         await veterinario.save();
         res.json({ msg: "Password modificado correctamente"});
     }catch(error){
+        //Este console.log es para verificar
         console.log(error);
     }
  
