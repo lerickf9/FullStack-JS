@@ -118,10 +118,13 @@ const olvidePassword = async(req, res) => {
 };
 
 const comprobarToken = async (req, res) => {
+    //Por estar leyendo desde la url se coloca re.params
     const { token } = req.params;
 
+    //CON ESTO VALIDAMOS QUE EXISTE EL USUARIO 
     const tokenValido = await Veterinario.findOne({ token });
 
+    //No se colaca nada en la BD pq solo estamos validando el token
     if(tokenValido){
         //el token es valido el usuario existe
         res.json({ msg: 'Token valido y el usuario existe'})
